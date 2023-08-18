@@ -10,12 +10,10 @@ $password = ""; // Cambia esto a la contraseña de la base de datos
 $dbname = "veterinaria_cli"; 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 // Verificar conexión
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['numce'])) {
         $numce = $_GET['numce'];
@@ -30,8 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     }
 }
-
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -76,8 +72,6 @@ $conn->close();
             <input type="submit" class="form-control" value="Buscar">
             <br>
           </form>
-
-          <?php if (!empty($selectedMascotaInfo)) { ?>
           <div class="mt-4">
             <form method="get">
               <label for="mascota" class="form-label">Selecciona una mascota:</label>
@@ -89,20 +83,26 @@ $conn->close();
               <input type="submit" class="form-control mt-2" value="Mostrar Información">
             </form>
             <?php
-    if (isset($_GET['mascota'])) {
-        $codigoMascotaSeleccionada = $_GET['mascota'];
-        $informacionMascotaSeleccionada = null;
-        
-        // Encontrar la información de la mascota seleccionada
-        foreach ($informacionMascotaSeleccionada as $mascota) {
-            if ($mascota['cod_mas'] === $codigoMascotaSeleccionada) {
-                $informacionMascotaSeleccionada = $mascota;
-                break;
-            }
-        }
-        
-        if (!empty($informacionMascotaSeleccionada)) {
+// ... (código anterior)
+
+if (isset($_GET['mascota'])) {
+  $codigoMascotaSeleccionada = $_GET['mascota'];
+  $informacionMascotaSeleccionada = array();  // Inicializar el arreglo para almacenar la información de la mascota seleccionada
+
+  // Obtener la información de la mascota seleccionada utilizando una consulta (similar a obtener la lista de mascotas)
+  $sql_selected_mascota = "SELECT m.cod_mas, m.nombre_mas AS nombreMascota, m.raza AS razaMascota, p.nombre AS nombreCliente, p.apellido AS apellidoCliente 
+                           FROM mascota m
+                           INNER JOIN persona p ON m.cedula = p.cedula
+                           WHERE m.cod_mas = '$codigoMascotaSeleccionada'";
+  
+  $result_selected_mascota = $conn->query($sql_selected_mascota);
+
+  if ($result_selected_mascota->num_rows > 0) {
+      $informacionMascotaSeleccionada = $result_selected_mascota->fetch_assoc();
+  }
+}
     ?>
+     <?php if (!empty($informacionMascotaSeleccionada)) {?>
     <div class="row mt-3">
         <div class="col-md-6">
             <label for="nombreMascota" class="form-label">Nombre de la Mascota</label>
@@ -123,7 +123,7 @@ $conn->close();
             <div class="form-control" id="apellidoCliente" name="apellidoCliente"><?php echo $informacionMascotaSeleccionada['apellidoCliente']; ?></div>
         </div>
     </div>
-    <?php } }} ?>
+    <?php } ?>
 </div>
           <!-- Información del Historial -->
           <h4 class="mt-4">Registro Historial</h4>
@@ -164,18 +164,17 @@ $conn->close();
                 <input type="text" class="form-control" id="tratamiento" name="tratamiento" required>
               </div>
             </div>
-
   <!-- ... (otros campos del formulario) ... -->
 </div>
 <!-- Botón de registro -->
 <button type="submit" class="btn btn-primary mt-3">Registrar</button>
 </form>
+<a href=""><button type="submit" class="btn btn-primary mt-3">Historial</button></a>
 </div>
 </div>
 </div>
 </div>
 </div>
-
 <!-- Incluir archivos JS de Bootstrap desde CDN -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
