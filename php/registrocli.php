@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Datos de conexión a la base de datos (ajusta estos valores según tu configuración)
     $servidor = "localhost";
     $usuario = "root";
-    $contrasena = "";
+    $contrasena = "root";
     $base_de_datos = "veterinaria_cli";
 
     // Conexión a la base de datos

@@ -6,7 +6,7 @@ $selectedMascotaInfo = array();
 
 $servername = "127.0.0.1"; // Cambia esto al nombre de tu servidor MySQL
 $username = "root"; // Cambia esto al nombre de usuario de la base de datos
-$password = ""; // Cambia esto a la contraseña de la base de datos
+$password = "root"; // Cambia esto a la contraseña de la base de datos
 $dbname = "veterinaria_cli"; 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   <div class="container">
     <a class="navbar-brand" href="/clinica_veterinaria/index.html">Inicio</a>
     
-    <a class="navbar-brand" href="    /clinica_veterinaria/cliente.html">Registrar Persona</a>
+    <a class="navbar-brand" href="/clinica_veterinaria/cliente.html">Registrar Persona</a>
         <a class="navbar-brand" href="/clinica_veterinaria/mascota.html">Registrar Mascota</a> 
         <a class="navbar-brand" href="/clinica_veterinaria/date.php"> Registar Historial</a> 
         <a class="navbar-brand" href="/clinica_veterinaria/php/cohis2.php">Consultar Historial</a> 
@@ -78,6 +78,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             <input type="submit" class="form-control" value="Buscar">
             <br>
           </form>
+
+ 
+<a class="btn btn-primary mt-2" href="/clinica_veterinaria/php/cohis2.php?numce=<?php echo isset($_GET['numce']) ? $_GET['numce'] : ''; ?>">Ver Historial</a>
+
           <div class="mt-4">
             <form method="get">
               <label for="mascota" class="form-label">Selecciona una mascota:</label>
@@ -175,7 +179,6 @@ if (isset($_GET['mascota'])) {
 <!-- Botón de registro -->
 <button type="submit" class="btn btn-primary mt-3">Registrar</button>
 </form>
-<a href=""><button type="submit" class="btn btn-primary mt-3">Historial</button></a>
 </div>
 </div>
 </div>

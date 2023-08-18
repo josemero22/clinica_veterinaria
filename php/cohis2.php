@@ -59,6 +59,12 @@
             background-color: #e0e0e0;
         }
     </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const numceValue = "<?php echo isset($_GET['numce']) ? $_GET['numce'] : ''; ?>";
+        document.getElementById("n_cedula").value = numceValue;
+    });
+</script>
 </head>
 <body>
     <!-- Encabezado -->
@@ -84,18 +90,19 @@
       </nav>
     <br>
     <h1>CONSULTAR HISTORIAL</h1>
+  
+
     <form method="post">
         <label for="n_cedula">N.cedula:</label>
         <input type="text" id="n_cedula" name="n_cedula" required>
         <input type="submit" value="Consultar">
     </form>
-
     <?php
     function consultarPorCedula($cedula) {
         // Conexión a la base de datos (debes completar los detalles de la conexión)
         $servername = "localhost";
         $username = "root";
-        $password = "";
+        $password = "root";
         $dbname = "veterinaria_cli";
 
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -111,25 +118,12 @@
         $verificarStmt->execute();
         $verificarResult = $verificarStmt->get_result();
 
-        if ($verificarResult->num_rows > 0) {
-            $query = "SELECT h.cod_mas, h.fecha_his, m.nombre_mas, m.fecha_na, h.diagnostico, h.receta, h.tratamiento
-                      FROM historial h
-                      INNER JOIN mascota m ON h.cod_mas = m.cod_mas
-                      WHERE m.cedula = ?";
-                
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("s", $cedula);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows > 0) {
+        if ($verificarResult->num_rows > 0) {  
                 $mascotas = array();  // Array para almacenar nombres de mascotas únicos
-            
                 // Llenar el array con nombres de mascotas únicos
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $verificarResult->fetch_assoc()) {
                     $mascotas[$row["cod_mas"]] = $row["nombre_mas"];
                 }
-            
                 echo "<form method='post'>";
                 echo "<label for='select_mascota'>Selecciona una mascota:</label>";
                 echo "<select id='select_mascota' name='select_mascota'>";
@@ -142,11 +136,6 @@
             } else {
                 echo "No se encontraron resultados para la cédula proporcionada.";
             }
-            
-            $stmt->close();
-        } else {
-            echo "No se encontraron resultados de mascotas para la cédula proporcionada.";
-        }
         $verificarStmt->close();
     }
 
@@ -154,7 +143,7 @@
         // Conexión a la base de datos (debes completar los detalles de la conexión)
         $servername = "localhost";
         $username = "root";
-        $password = "";
+        $password = "root";
         $dbname = "veterinaria_cli";
 
         $conn = new mysqli($servername, $username, $password, $dbname);

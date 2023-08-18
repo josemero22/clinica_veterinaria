@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Datos de conexión a la base de datos (ajusta estos valores según tu configuración)
     $servidor = "localhost";
     $usuario = "root";
-    $contrasena = "";
+    $contrasena = "root";
     $base_de_datos = "veterinaria_cli";
 
     // Conexión a la base de datos
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Consulta para insertar los datos en la base de datos
     $consulta = "INSERT INTO historial
-                 VALUES ('$codigoHistorial', '$codigomas', '$fechaHistorial', '$diagnostico', '$receta', '$tratamiento')";
+                 VALUES (0, '$codigomas', '$fechaHistorial', '$diagnostico', '$receta', '$tratamiento')";
 
     if ($conexion->query($consulta) === TRUE) {
         echo "Registro exitoso. Los datos del historial se han guardado en la base de datos.";

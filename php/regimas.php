@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Datos de conexión a la base de datos (ajusta estos valores según tu configuración)
     $servidor = "localhost";
     $usuario = "root";
-    $contrasena = "";
+    $contrasena = "root";
     $base_de_datos = "veterinaria_cli";
 
     // Conexión a la base de datos
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Consulta para insertar los datos en la base de datos
     $consulta = "INSERT INTO mascota (cod_mas, cedula , nombre_mas, fecha_na, sexo, especie, raza, color, peso) 
-                 VALUES ('$codigomascota','$cedula', '$nombremascota','$fechanacimiento','$sexo','$especie','$raza','$color','$peso')";
+                 VALUES (0,'$cedula', '$nombremascota','$fechanacimiento','$sexo','$especie','$raza','$color','$peso')";
 
     if ($conexion->query($consulta) === TRUE) {
         echo "Registro exitoso. Los datos de la mascota se han guardado en la base de datos.";
