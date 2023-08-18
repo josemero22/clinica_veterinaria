@@ -116,6 +116,12 @@ $conn->close();
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="/clinica_veterinaria/index.html">Inicio</a>
+      
+      <a class="navbar-brand" href="cliente.html">Registrar Persona</a>
+        <a class="navbar-brand" href="mascota.html">Registrar Mascota</a> 
+        <a class="navbar-brand" href="date.php"> Registar Historial</a> 
+        <a class="navbar-brand" href="php/cohis2.php">Consultar Historial</a> 
+        <a class="navbar-brand" href="elegir.html">Actualizar Datos</a> 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
