@@ -118,7 +118,7 @@ $conn->close();
       <a class="navbar-brand" href="/clinica_veterinaria/index.html">Inicio</a>
       
       <a class="navbar-brand" href="  /clinica_veterinaria/cliente.html">Registrar Persona</a>
-        <a class="navbar-brand" href="/clinica_veterinaria/mascota.html">Registrar Mascota</a> 
+        <a class="navbar-brand" href="/clinica_veterinaria/mascota.php">Registrar Mascota</a> 
         <a class="navbar-brand" href="/clinica_veterinaria/date.php"> Registar Historial</a> 
         <a class="navbar-brand" href="/clinica_veterinaria/php/cohis2.php">Consultar Historial</a> 
         <a class="navbar-brand" href="/clinica_veterinaria/elegir.html">Actualizar Datos</a> 

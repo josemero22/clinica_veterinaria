@@ -3,6 +3,9 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/clinica_veterinaria/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.15/jspdf.plugin.autotable.js"></script>
+
     <title>Tabla de Usuarios</title>
     <style>
         body {
@@ -58,13 +61,15 @@
         tr:hover {
             background-color: #e0e0e0;
         }
-    </style>
+    </style>    
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const numceValue = "<?php echo isset($_GET['numce']) ? $_GET['numce'] : ''; ?>";
         document.getElementById("n_cedula").value = numceValue;
-    });
+});
+ 
 </script>
+
 </head>
 <body>
     <!-- Encabezado -->
@@ -73,7 +78,7 @@
             <a class="navbar-brand" href="/clinica_veterinaria/index.html">Inicio</a>
             
         <a class="navbar-brand" href="/clinica_veterinaria/cliente.html">Registrar Persona</a>
-        <a class="navbar-brand" href="/clinica_veterinaria/mascota.html">Registrar Mascota</a> 
+        <a class="navbar-brand" href="/clinica_veterinaria/mascota.php">Registrar Mascota</a> 
         <a class="navbar-brand" href="/clinica_veterinaria/date.php"> Registar Historial</a> 
         <a class="navbar-brand" href="/clinica_veterinaria/php/cohis2.php">Consultar Historial</a> 
         <a class="navbar-brand" href="/clinica_veterinaria/elegir.html">Actualizar Datos</a> 
@@ -98,6 +103,7 @@
         <input type="submit" value="Consultar">
     </form>
     <?php
+      session_start();
     function consultarPorCedula($cedula) {
         // Conexión a la base de datos (debes completar los detalles de la conexión)
         $servername = "localhost";
@@ -130,13 +136,14 @@
                 foreach ($mascotas as $cod => $nombre) {
                     echo "<option value='$cod'>$nombre</option>";
                 }
-                echo "</select>";
+                echo "</select> ";
                 echo "<input type='submit' value='Mostrar Historial'>";
-                echo "</form>";
+                echo "</form>"; 
             } else {
                 echo "No se encontraron resultados para la cédula proporcionada.";
             }
         $verificarStmt->close();
+        
     }
 
     function mostrarHistorialMascota($cod_mas) {
@@ -186,9 +193,15 @@
                 echo "</tr>";
             }
             echo "</table>";
+
+            ?>
+             
+             <a class="btn btn-primary mt-2" href="/clinica_veterinaria/reportes/index.php" target="_blank">IMPRIMIR PDF</a>
+
+             <?php
         } else {
             echo "No se encontraron resultados para la mascota seleccionada.";
-        }
+        }      
         $stmt->close();
     }
 
@@ -203,9 +216,11 @@
         if (isset($_POST['select_mascota'])) {
             $cod_mas = $_POST['select_mascota'];
             mostrarHistorialMascota($cod_mas);
+            $_SESSION['dola'] = $cod_mas;
         }
+       
     }
-    ?>
-
+    
+ ?>
 </body>
 </html>
