@@ -195,9 +195,7 @@
             echo "</table>";
 
             ?>
-             
              <a class="btn btn-primary mt-2" href="/clinica_veterinaria/reportes/index.php" target="_blank">IMPRIMIR PDF</a>
-
              <?php
         } else {
             echo "No se encontraron resultados para la mascota seleccionada.";

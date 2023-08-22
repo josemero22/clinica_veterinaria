@@ -177,7 +177,7 @@ if (isset($_GET['mascota'])) {
   <!-- ... (otros campos del formulario) ... -->
 </div>
 <!-- Botón de registro -->
-<button type="submit" class="btn btn-primary mt-3">Registrar</button>
+<button  target="_blank" type="submit" class="btn btn-primary mt-3">Registrar</button>
 </form>
 </div>
 </div>
