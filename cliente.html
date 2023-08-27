@@ -13,7 +13,12 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand" href="/clinica_veterinaria/index.html">Inicio</a>
+          <a class="navbar-brand" href="/clinica_veterinaria/index.html">Inicio</a> 
+        <a class="navbar-brand" href="/clinica_veterinaria/cliente.html">Registrar Persona</a>
+        <a class="navbar-brand" href="/clinica_veterinaria/mascota.php">Registrar Mascota</a> 
+        <a class="navbar-brand" href="/clinica_veterinaria/date.php"> Registar Historial</a> 
+        <a class="navbar-brand" href="/clinica_veterinaria/php/cohis2.php">Consultar Historial</a> 
+        <a class="navbar-brand" href="/clinica_veterinaria/elegir.html">Actualizar Datos</a> 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -34,7 +39,12 @@
         <input class="controls" type="text" name="dirrecion" id="dirrecion" placeholder="Ingrese su dirrecion">
         <input class="controls" type="text" name="telefono" id="telefono" placeholder="Ingrese su telefono">
         <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su correo">
-        <input class="controls" type="text" name="tipo" id="tipo" placeholder="Ingrese el tipo de usuario">
+        <select class="controls" name="tipo" id="tipo">
+          <option value="cliente">Cliente</option>
+          <option value="usuario">Usuario</option>
+          <option value="auxiliar">Auxiliar</option>
+          <option value="veterinario">Veterinario</option>
+       </select>
         <input class="botons"   type="submit" value="Registrar">
        <a href="php/actualizar_cliente.php"><div class="bttn-unite bttn-md bttn-primary">Actualizar Datos</div></a> 
 </form>    

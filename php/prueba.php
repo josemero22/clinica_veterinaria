@@ -163,8 +163,10 @@
     $query = "SELECT h.receta
               FROM historial h
               INNER JOIN mascota m ON h.cod_mas = m.cod_mas
-              WHERE h.cod_mas = ?
-              ORDER BY h.cod_his DESC";        
+              WHERE h.cod_mas = ?";
+              
+
+            
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $cod_mas);
     $stmt->execute();
@@ -175,11 +177,10 @@
             <tr>           
                 <th>Receta</th>         
             </tr>";
-            $row = $result->fetch_assoc();
-                echo "<tr>";            
-                echo "<td>" . $row["receta"] . "</td>";          
-                echo "</tr>";
-            
+        $row = $result->fetch_assoc();  // Obtener el primer resultado
+        echo "<tr>";            
+        echo "<td>" . $row["receta"] . "</td>";          
+        echo "</tr>";
         echo "</table>";
         ?>
         <a class="btn btn-primary mt-2" href="/clinica_veterinaria/reportes/index.php" target="_blank">IMPRIMIR PDF</a>

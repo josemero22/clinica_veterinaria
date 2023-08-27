@@ -13,7 +13,7 @@ $datos = array(
 
 $servername = "127.0.0.1"; // Cambia esto al nombre de tu servidor MySQL
 $username = "root"; // Cambia esto al nombre de usuario de la base de datos
-$password = ""; // Cambia esto a la contraseña de la base de datos
+$password = "root"; // Cambia esto a la contraseña de la base de datos
 $dbname = "veterinaria_cli"; 
 
 // Crear conexión
@@ -116,6 +116,12 @@ $conn->close();
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="/clinica_veterinaria/index.html">Inicio</a>
+      
+      <a class="navbar-brand" href="  /clinica_veterinaria/cliente.html">Registrar Persona</a>
+        <a class="navbar-brand" href="/clinica_veterinaria/mascota.php">Registrar Mascota</a> 
+        <a class="navbar-brand" href="/clinica_veterinaria/date.php"> Registar Historial</a> 
+        <a class="navbar-brand" href="/clinica_veterinaria/php/cohis2.php">Consultar Historial</a> 
+        <a class="navbar-brand" href="/clinica_veterinaria/elegir.html">Actualizar Datos</a> 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

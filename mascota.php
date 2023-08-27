@@ -39,25 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     }
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $cedula = $_POST['cedula'];
-    $nombres = $_POST['nombres'];
-    $apellidos = $_POST['apellidos'];
-    $direccion = $_POST['direccion'];
-    $telefono = $_POST['telefono'];
-    $correo = $_POST['correo'];
-    $tipo = $_POST['tipo'];
-
-
-    $sql = "UPDATE persona SET nombre = '$nombres', apellido = '$apellidos', direccion = '$direccion', telefono = '$telefono', correo = '$correo', tipo ='$tipo' WHERE cedula = '$cedula'";
-    if ($conn->query($sql) === TRUE) {
-        echo "Datos actualizados exitosamente.";
-    } else {
-        echo "Error al actualizar los datos: " . $conn->error;
-    }
-}
-
 $conn->close();
 ?>
 
@@ -103,38 +84,40 @@ $conn->close();
     <input type="submit" class="form-control" value="Buscar"/>
     <br/>
 </form>
-
-<form class="form-register" method="post">
-    <h4>Actualizar Datos.</h4>
-    <label for="cedula">Cédula:</label>
-    <input value="<?php echo $datos['cedula']; ?>" class="controls" type="text" name="cedula" id="cedula"
-           placeholder="Ingrese su cedula"/><br/>
-
+<div  class="form-register">
+  <h4>datos del cliente</h4>
     <label for="nombres">Nombres:</label>
     <input class="controls" type="text" name="nombres" id="nombres" placeholder="Ingrese su nombres"
-           value="<?php echo $datos['nombres']; ?>"/><br/>
+           value="<?php echo $datos['nombres']; ?>"/>
 
     <label for="apellidos">Apellidos:</label>
     <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su apellidos"
-           value="<?php echo $datos['apellidos']; ?>"/><br/>
+           value="<?php echo $datos['apellidos']; ?>"/>
+ </div>
 
-    <label for="dirrecion">Dirección:</label>
-    <input class="controls" type="text" name="direccion" id="direccion" placeholder="Ingrese su dirección"
-           value="<?php echo $datos['direccion']; ?>"/><br/>
 
-    <label for="telefono">Teléfono:</label>
-    <input class="controls" type="text" name="telefono" id="telefono" placeholder="Ingrese su teléfono"
-           value="<?php echo $datos['telefono']; ?>"/><br/>
+ <form action="php/regimas.php" method="post"    class="form-register">
+    <h4>Registro de Mascota</h4>
+        <input class="controls" type="hidden" name="cod_mascota" id="cod_mascota" placeholder="Ingrese el codigo" required>
+        <input value="<?php echo $datos['cedula']; ?>" class="controls" type="text" name="cedula" id="cedula"
+           placeholder="Ingrese su cedula"/>
+        <input class="controls" type="text" name="nombre_de_mascota" id="nombre_de_mascota" placeholder="Ingrese nombre de mascota">
+        <input class="controls" type="text" name="fecha_de_nacimiento" id="fecha_de_nacimiento" placeholder="Ingrese la fecha de nacimiento">
+        <select class="controls" name="sexo" id="sexo">
+            <option value="Hembra">Hembra</option>
+            <option value="Macho">Macho</option>
+        </select>
 
-    <label for="correo">Correo:</label>
-    <input class="controls" type="text" name="correo" id="correo" placeholder="Ingrese su correo"
-           value="<?php echo $datos['correo']; ?>"/><br/>
-           <label for="correo">Tipo:</label>
-    <input class="controls" type="text" name="tipo" id="tipo" placeholder="Ingrese su correo"
-           value="<?php echo $datos['tipo']; ?>"/><br/>
 
-    <input type="submit" value="Actualizar"/>
-</form>
+        <input class="controls" type="text" name="especie" id="especie" placeholder="Ingrese su especie">
+        <input class="controls" type="text" name="raza" id="raza" placeholder="Ingrese su raza">
+        <input class="controls" type="text" name="color" id="color" placeholder="Ingrese su color">
+        <input class="controls" type="text" name="peso" id="peso" placeholder="Ingrese su peso">
+        <input class="botons" type="submit" value="Registrar">
+        <a href="php/actualizar_mascota.php"><div class="bttn-unite bttn-md bttn-primary">Actualizar Datos</div></a> 
+    </form>
+    
+
 
 </body>
 </html>

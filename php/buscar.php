@@ -40,7 +40,7 @@ function verificarRegistro($cedula) {
 function obtenerDatos($cedula) {
     $servername = "127.0.0.1"; // Cambia esto al nombre de tu servidor MySQL
     $username = "root"; // Cambia esto al nombre de usuario de la base de datos
-    $password = ""; // Cambia esto a la contraseña de la base de datos
+    $password = "root"; // Cambia esto a la contraseña de la base de datos
     $dbname = "veterinaria_cli"; // Cambia esto al nombre de tu base de datos
     
     $conexion = new mysqli($servername, $username, $password, $dbname);

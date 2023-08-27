@@ -147,49 +147,61 @@
     }
 
     function mostrarHistorialMascota($cod_mas) {
-    // Conexión a la base de datos (debes completar los detalles de la conexión)
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
-    $dbname = "veterinaria_cli";
+        // Conexión a la base de datos (debes completar los detalles de la conexión)
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "veterinaria_cli";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
-    }
+        // Verificar la conexión
+        if ($conn->connect_error) {
+            die("Conexión fallida: " . $conn->connect_error);
+        }
 
-    $query = "SELECT h.receta
-              FROM historial h
-              INNER JOIN mascota m ON h.cod_mas = m.cod_mas
-              WHERE h.cod_mas = ?
-              ORDER BY h.cod_his DESC";        
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $cod_mas);
-    $stmt->execute();
-    $result = $stmt->get_result();
+        $query = "SELECT h.cod_mas, h.fecha_his, m.nombre_mas, m.fecha_na, h.diagnostico, h.receta, h.tratamiento
+                  FROM historial h
+                  INNER JOIN mascota m ON h.cod_mas = m.cod_mas
+                  WHERE h.cod_mas = ?";
+                
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $cod_mas);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        echo "<table border='1'>
-            <tr>           
-                <th>Receta</th>         
-            </tr>";
-            $row = $result->fetch_assoc();
-                echo "<tr>";            
-                echo "<td>" . $row["receta"] . "</td>";          
+        if ($result->num_rows > 0) {
+            echo "<table border='1'>
+                <tr>
+                    <th>codigo mascota</th>
+                    <th>Fecha de Historial</th>
+                    <th>Nombre de Mascota</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Diagnóstico</th>
+                    <th>Receta</th>
+                    <th>Tratamiento</th>
+                </tr>";
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["cod_mas"] . "</td>";
+                echo "<td>" . $row["fecha_his"] . "</td>";
+                echo "<td>" . $row["nombre_mas"] . "</td>";
+                echo "<td>" . $row["fecha_na"] . "</td>";
+                echo "<td>" . $row["diagnostico"] . "</td>";
+                echo "<td>" . $row["receta"] . "</td>";
+                echo "<td>" . $row["tratamiento"] . "</td>";
                 echo "</tr>";
-            
-        echo "</table>";
-        ?>
-        <a class="btn btn-primary mt-2" href="/clinica_veterinaria/reportes/index.php" target="_blank">IMPRIMIR PDF</a>
-        <?php
-    } else {
-        echo "No se encontraron resultados para la mascota seleccionada.";
-    }      
-    $stmt->close();
-}
+            }
+            echo "</table>";
 
+            ?>
+             <a class="btn btn-primary mt-2" href="/clinica_veterinaria/reportes/index.php" target="_blank">IMPRIMIR PDF</a>
+             <?php
+        } else {
+            echo "No se encontraron resultados para la mascota seleccionada.";
+        }      
+        $stmt->close();
+    }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST['n_cedula'])) {
